@@ -12,6 +12,7 @@ class UserAdmin(BaseUserAdmin):
 
     list_display = [
         'email',
+        'is_confirmed_email',
         'first_name',
         'last_name',
         'birthday_date',
@@ -21,10 +22,11 @@ class UserAdmin(BaseUserAdmin):
     list_filter = [
         'is_admin',
         'is_active',
+        'is_confirmed_email',
         'birthday_date',
     ]
     fieldsets = (
-        (None, {'fields': ['email', 'password', 'is_active', ]}),
+        (None, {'fields': ['email', 'is_confirmed_email', 'password', 'is_active', ]}),
         ('Personal info', {'fields': ['first_name', 'last_name', 'birthday_date', ]}),
         ('Permissions', {'fields': ['is_admin', ]}),
     )

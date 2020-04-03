@@ -4,6 +4,10 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from .models import User
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(
         label='Password',
@@ -18,7 +22,13 @@ class UserCreationForm(forms.ModelForm):
         model = User
         fields = [
             'email',
+            'first_name',
+            'last_name',
+            'birthday_date',
         ]
+        widgets = {
+            'birthday_date': DateInput(),
+        }
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')

@@ -9,6 +9,9 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
+    is_confirmed_email = models.BooleanField(
+        default=False,
+    )
     first_name = models.CharField(
         max_length=255,
         null=True,
@@ -27,7 +30,7 @@ class User(AbstractBaseUser):
         default=None,
     )
     is_active = models.BooleanField(
-        default=False,
+        default=True,
     )
     is_admin = models.BooleanField(
         default=False,

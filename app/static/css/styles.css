@@ -1,0 +1,84 @@
+header {
+    padding: 10px 20px 10px 20px;
+    background-color: #ddffdd;
+}
+
+.header_title,
+.header_title:hover,
+.header_title:focus {
+    color: #276EBB;
+    text-decoration: none;
+    text-underline: none;
+}
+
+.header_login_logout {
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.header_link,
+.header_link:focus,
+.header_link:hover {
+    color: #276EBB;
+    text-decoration: none;
+    text-underline: none;
+    margin-right: 20px;
+}
+
+.login_signup_form {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    margin-top: 100px;
+    padding: 10px;
+    background-color: #FFFFFF;
+    webkit-box-shadow: 0 1px 2px 1px rgba(154, 154, 204, 0.22);
+    -moz-box-shadow: 0 1px 2px 1px rgba(154, 154, 204, 0.22);
+    box-shadow: 0 1px 2px 1px rgba(154, 154, 204, 0.22)
+}
+
+.login_signup_button {
+    margin: 0 auto
+}
+
+.login_signup_form_title {
+    text-align: center;
+}
+
+.login_signup_field {
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    height: 35px;
+    font-size: 20px;
+    font-family: Roboto, sans-serif;
+}
+
+.login_signup_field > input {
+    width: 90%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.form_row {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    display: table;
+}
+
+.form_edit_title {
+    margin-left: 20px;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.form_error_text {
+    color: red;
+    margin: 0;
+}
+
+.form_placeholder_text {
+    color: grey;
+}
