@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-1"></div>
+            <div class="posts_block col-xl-6 col-lg-6 col-md-8 col-sm-10 col-xs-12">
+                {% if user.is_authenticated and user == post.creator %}
+                    <a href="{% url "posts:edit" post.pk %}">
+                        <button class="btn btn-primary btn-success add_post_btn">Edit Post</button>
+                    </a>
+                {% endif %}
+                <div class="post">
+                    <p>{{ post.body|safe }}</p>
+                    <div class="post_date">
+                        <p>Published <span class="post_timespan">{{ post.timespan }}</span> by
+                            <span class="post_creator">{{ post.creator.email }}</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-2 col-sm-1"></div>
+        </div>
+    </div>
+{% endblock %}

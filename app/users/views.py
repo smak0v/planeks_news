@@ -24,7 +24,7 @@ def signup_view(request):
                 'token': account_activation_token.make_token(user),
             })
             user.email_user('Activate your PLANEKS News Account', strip_tags(html_message), html_message=html_message)
-            return redirect('account_activation_sent')
+            return redirect('users:account_activation_sent')
     else:
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form, })

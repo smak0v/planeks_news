@@ -4,7 +4,7 @@
 
     <p>By clicking on the following link, you are confirming your email address.</p>
 
-    <a style="" href="http://{{ domain }}{% url 'activate_account' uidb64=uid token=token %}">
+    <a style="" href="http://{{ domain }}{% url 'users:activate_account' uidb64=uid token=token %}">
         <button style="border-radius: 12px; padding: 5px 20px 5px 20px; background-color: #276EBB; outline: none;
                 border: none; color: #f5dd5d; height: 40px; font-size: 25px;">
             Confirm Email Address

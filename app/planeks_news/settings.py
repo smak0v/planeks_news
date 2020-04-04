@@ -21,13 +21,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.forms',
 
     # Installed apps
-    'djcelery',
+    'markdownx',
+    'markdownify',
 
     # Custom apps
     'users',
     'news',
+    'comments',
 ]
 
 MIDDLEWARE = [
@@ -79,9 +82,11 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-LOGIN_REDIRECT_URL = 'main'
+LOGIN_URL = 'users:login'
 
-LOGOUT_REDIRECT_URL = 'main'
+LOGIN_REDIRECT_URL = 'posts:main'
+
+LOGOUT_REDIRECT_URL = 'posts:main'
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -128,6 +133,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 APPEND_SLASH = True
 
 HOST = os.environ.get('HOST', 'http://127.0.0.1:8000/')
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 # Email
 EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'

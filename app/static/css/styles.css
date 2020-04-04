@@ -45,7 +45,8 @@ header {
     text-align: center;
 }
 
-.login_signup_field {
+.login_signup_field,
+.post_form_field > .markdownx {
     border-radius: 5px;
     border: none;
     outline: none;
@@ -56,6 +57,12 @@ header {
 
 .login_signup_field > input {
     width: 90%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.post_form_field > .markdownx > textarea {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -86,4 +93,59 @@ header {
 .info_header {
     margin: 100px auto 0;
     text-align: center;
+}
+
+.post_form {
+    margin: 50px;
+}
+
+.markdownx > textarea {
+    padding: 10px;
+}
+
+.add_post_btn {
+    width: 33%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.posts_block {
+    margin: 20px;
+    text-align: center;
+}
+
+.post {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    padding: 10px 10px 10px 20px;
+    border-radius: 12px;
+    font-family: arial sans-serif;
+    margin: auto auto 20px;
+    text-align: left;
+}
+
+.post:hover,
+.post:focus {
+    outline: 1px solid #f5dd5d;
+    border-radius: 0;
+}
+
+.post_link,
+.post_link:hover,
+.post_link:focus {
+    text-decoration: none;
+    color: black;
+}
+
+.post_date {
+    text-align: right;
+    margin-right: 30px;
+}
+
+.post_timespan {
+    color: #5897fb;
+}
+
+.post_creator {
+    color: #5897fb;
 }

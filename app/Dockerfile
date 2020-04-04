@@ -6,7 +6,9 @@ ENV APP /usr/src/app
 
 WORKDIR $APP
 
-RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev libffi-dev
+RUN apk update
+RUN apk add postgresql-dev gcc python3-dev musl-dev libffi-dev jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev \
+            tiff-dev tk-dev tcl-dev harfbuzz-dev fribidi-dev
 
 RUN pip install --upgrade pip
 

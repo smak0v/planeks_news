@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="post_form">
+                <h2 class="post_form_title">New Post</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form_row text-center">
+                            <div class="post_form_field">
+                                {{ field }}
+                            </div>
+                            {% if field.help_text %}
+                                <small class="form_placeholder_text">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <p class="form_error_text">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <div class="text-center">
+                        <button type="submit" class="login_signup_button btn-success btn-primary btn">
+                            Create Post
+                        </button>
+                    </div>
+                </form>
+                {{ form.media }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
