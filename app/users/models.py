@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractBaseUser
+from django.core.mail import send_mail
 from django.db import models
 
 from .managers import UserManager
@@ -30,7 +31,7 @@ class User(AbstractBaseUser):
         default=None,
     )
     is_active = models.BooleanField(
-        default=True,
+        default=False,
     )
     is_admin = models.BooleanField(
         default=False,
@@ -53,3 +54,6 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        send_mail(subject, message, from_email, [self.email, ], **kwargs)

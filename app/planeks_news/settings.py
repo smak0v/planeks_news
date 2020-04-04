@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Installed apps
+    'djcelery',
 
     # Custom apps
     'users',
@@ -127,3 +128,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 APPEND_SLASH = True
 
 HOST = os.environ.get('HOST', 'http://127.0.0.1:8000/')
+
+# Email
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False

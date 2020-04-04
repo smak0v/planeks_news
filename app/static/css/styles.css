@@ -82,3 +82,8 @@ header {
 .form_placeholder_text {
     color: grey;
 }
+
+.info_header {
+    margin: 100px auto 0;
+    text-align: center;
+}

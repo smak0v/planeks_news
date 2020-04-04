@@ -33,7 +33,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'birthday_date', 'password1', 'password2'),
+            'fields': ('email', 'first_name', 'last_name', 'birthday_date', 'is_admin', 'password1', 'password2'),
         }),
     )
     search_fields = [
@@ -52,4 +52,3 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
-admin.site.unregister(Group)
