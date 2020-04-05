@@ -18,7 +18,7 @@ def signup_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            html_message = render_to_string('registration/account_activation_email.html', {
+            html_message = render_to_string('email/account_activation.html', {
                 'domain': get_current_site(request).domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),

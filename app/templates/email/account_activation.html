@@ -1,0 +1,12 @@
+{% autoescape off %}
+    <h2>You're on your way!</h2>
+    <h2>Let's confirm your email address.</h2>
+
+    <p>By clicking on the following link, you are confirming your email address.</p>
+
+    <form action="http://{{ domain }}{% url 'users:activate_account' uidb64=uid token=token %}">
+        <input type="submit" style="border-radius: 12px; padding: 5px 20px 5px 20px; background-color: #276EBB;
+                                    outline: none; border: none; color: #f5dd5d; height: 40px; font-size: 25px;"
+               value="Confirm Email Address"/>
+    </form>
+{% endautoescape %}

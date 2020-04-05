@@ -38,7 +38,7 @@ header {
 }
 
 .login_signup_button {
-    margin: 0 auto
+    margin: 0 auto 20px;
 }
 
 .login_signup_form_title {
@@ -62,7 +62,7 @@ header {
     -webkit-box-sizing: border-box;
 }
 
-.post_form_field > .markdownx > textarea {
+.post_form_field > .markdownx > div > textarea {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -96,11 +96,26 @@ header {
 }
 
 .post_form {
-    margin: 50px;
+    margin-top: 20px;
 }
 
-.markdownx > textarea {
+.post_form_title {
+    margin-left: 15px;
+}
+
+.markdownx > div > textarea {
     padding: 10px;
+    width: 100%;
+    resize: none;
+    min-height: 500px;
+}
+
+.markdownx-preview {
+    text-align: left;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    font-family: Arial, sans-serif;
+    margin: auto auto 20px;
 }
 
 .add_post_btn {
@@ -114,7 +129,8 @@ header {
     text-align: center;
 }
 
-.post {
+.post,
+.post_detail {
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
     padding: 10px 10px 10px 20px;
@@ -122,6 +138,10 @@ header {
     font-family: arial sans-serif;
     margin: auto auto 20px;
     text-align: left;
+}
+
+.post_detail {
+    cursor: auto;
 }
 
 .post:hover,
@@ -142,10 +162,49 @@ header {
     margin-right: 30px;
 }
 
-.post_timespan {
+.post_timestamp {
     color: #5897fb;
 }
 
 .post_creator {
     color: #5897fb;
+}
+
+.post_comment_form_field > textarea {
+    width: 100%;
+    resize: none;
+    padding: 10px;
+    height: 150px;
+}
+
+.post_comments {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 12px;
+    font-family: Arial, sans-serif;
+    margin: auto auto 20px;
+    text-align: left;
+}
+
+.comments_title {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.comment {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 12px;
+    font-family: arial sans-serif;
+    text-align: left;
+    margin: 20px;
+}
+
+.comment_text {
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+}
+
+.comment_info {
+    margin-bottom: 5px;
 }

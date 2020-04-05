@@ -1,4 +1,7 @@
 {% extends 'base/base.html' %}
+{% load static %}
+{% block title %}| Post details{% endblock %}
+{% block styles %}{% endblock styles %}
 {% block content %}
     <div class="container-fluid">
         <div class="row">
@@ -9,15 +12,55 @@
                         <button class="btn btn-primary btn-success add_post_btn">Edit Post</button>
                     </a>
                 {% endif %}
-                <div class="post">
+                <div class="post_detail">
                     <p>{{ post.body|safe }}</p>
                     <div class="post_date">
-                        <p>Published <span class="post_timespan">{{ post.timespan }}</span> by
+                        <p>Published <span class="post_timestamp">{{ post.timestamp }}</span> by
                             <span class="post_creator">{{ post.creator.email }}</span></p>
                     </div>
+                </div>
+                <div class="post_comments">
+                    {% if user.is_authenticated %}
+                        <form method="post">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <div class="form_row text-center">
+                                    <div class="post_comment_form_field">
+                                        {{ field }}
+                                    </div>
+                                    {% if field.help_text %}
+                                        <small class="form_placeholder_text">{{ field.help_text }}</small>
+                                    {% endif %}
+                                    {% for error in field.errors %}
+                                        <p class="form_error_text">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                            <div class="text-center">
+                                <button type="submit" class="login_signup_button btn-success btn-primary btn">
+                                    Add Comment
+                                </button>
+                            </div>
+                        </form>
+                    {% endif %}
+                    {% if comments %}
+                        <h2 class="comments_title">Comments</h2>
+                        {% for comment in comments %}
+                            <div class="comment">
+                                <p class="comment_text">{{ comment.body }}</p>
+                                <div class="post_date">
+                                    <p class="comment_info">Commented by
+                                        <span class="post_creator">{{ comment.creator.email }}</span> at
+                                        <span class="post_timestamp">{{ comment.timestamp }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-2 col-sm-1"></div>
         </div>
     </div>
 {% endblock %}
+{% block scripts %}{% endblock scripts %}

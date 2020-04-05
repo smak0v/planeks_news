@@ -1,0 +1,9 @@
+{% autoescape off %}
+    <h2>Your post was commented by {{ commentator }}</h2>
+
+    <form action="http://{{ domain }}{% url 'posts:details' pk %}">
+        <input type="submit" style="border-radius: 12px; padding: 5px 20px 5px 20px; background-color: #276EBB;
+                                    outline: none; border: none; color: #f5dd5d; height: 40px; font-size: 25px;"
+               value="Show Comments"/>
+    </form>
+{% endautoescape %}

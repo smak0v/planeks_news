@@ -5,7 +5,7 @@ from users.models import User
 
 
 class Post(models.Model):
-    timespan = models.DateTimeField(
+    timestamp = models.DateTimeField(
         auto_now_add=True,
     )
     creator = models.ForeignKey(
