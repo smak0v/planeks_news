@@ -1,9 +1,14 @@
 from django.contrib import admin
+from planeks_news.admin import admin_site
 
 from .models import PostComment
 
 
 class PostCommentAdmin(admin.ModelAdmin):
+    readonly_fields = [
+        'creator',
+        'post',
+    ]
     list_display = [
         'post',
         'creator',
@@ -35,4 +40,4 @@ class PostCommentAdmin(admin.ModelAdmin):
     list_per_page = 50
 
 
-admin.site.register(PostComment, PostCommentAdmin)
+admin_site.register(PostComment, PostCommentAdmin)

@@ -1,5 +1,5 @@
-from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from planeks_news.admin import admin_site
 
 from .forms import UserChangeForm, UserCreationForm
 from .models import User
@@ -50,4 +50,4 @@ class UserAdmin(BaseUserAdmin):
     list_per_page = 50
 
 
-admin.site.register(User, UserAdmin)
+admin_site.register(User, UserAdmin)
