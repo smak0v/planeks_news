@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     # Installed apps
     'markdownx',
     'markdownify',
+    'djcelery',
+    'djcelery_email',
 
     # Custom apps
     'users',
@@ -137,8 +139,17 @@ HOST = os.environ.get('HOST', 'http://127.0.0.1:8000/')
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 # Email
-EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 
-SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+EMAIL_HOST = 'smtp.sendgrid.net'
 
-SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+EMAIL_PORT = '587'
+
+EMAIL_HOST_USER = 'apikey'
+
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_API_KEY')
+
+EMAIL_USE_TLS = True
+
+# Celery
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')

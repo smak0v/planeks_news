@@ -15,7 +15,10 @@ services:
     env_file:
       - ./.env.prod
     depends_on:
+      - rabbitmq
       - db
+    networks:
+      - default
     restart: on-failure
   db:
     image: postgres:12.0-alpine
@@ -24,6 +27,8 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env.prod.db
+    networks:
+      - default
     restart: on-failure
   nginx:
     build: ./nginx
@@ -35,9 +40,38 @@ services:
       - 1337:80
     depends_on:
       - web
+    networks:
+      - default
     restart: on-failure
+  rabbitmq:
+    image: rabbitmq:latest
+    container_name: planeks_news_rabbitmq
+    hostname: rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+    env_file:
+      - ./.env.dev
+    networks:
+      - default
+  celere_worker:
+    container_name: celery_worker
+    command: sh -c "celery -A planeks_news worker -l info"
+    image: web_image
+    env_file:
+      - ./.env.dev
+    networks:
+      - default
+    restart: on-failure
+    depends_on:
+      - web
+      - db
+      - rabbitmq
 
 volumes:
   postgres_data:
   static_volume:
   media_volume:
+
+networks:
+  default:

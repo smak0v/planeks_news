@@ -208,3 +208,7 @@ header {
 .comment_info {
     margin-bottom: 5px;
 }
+
+.red {
+    color: red;
+}

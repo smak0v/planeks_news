@@ -2,6 +2,7 @@ from comments.forms import PostCommentForm
 from comments.models import PostComment
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
+from django.http import Http404
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
@@ -17,7 +18,7 @@ class PostsListView(ListView):
     template_name = 'news/posts_list.html'
 
     def get(self, request, *args, **kwargs):
-        posts = Post.objects.all().order_by('-timestamp')
+        posts = Post.objects.filter(status='APPROVE').order_by('-timestamp')
         for post in posts:
             post.body = markdownify(post.body)
         return render(request, self.template_name, {'posts': posts, })
@@ -28,7 +29,10 @@ class PostDetailView(View):
     form_class = PostCommentForm
 
     def get(self, request, *args, **kwargs):
-        post = Post.objects.get(pk=kwargs.get('pk'))
+        try:
+            post = Post.objects.get(pk=kwargs.get('pk'), status='APPROVE')
+        except Post.DoesNotExist:
+            raise Http404('Post does not exist')
         comments = PostComment.objects.filter(post=post.pk).order_by('-timestamp')
         post.body = markdownify(post.body)
         return render(request, self.template_name, {'post': post, 'form': self.form_class(), 'comments': comments, })
@@ -36,7 +40,10 @@ class PostDetailView(View):
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-        post = Post.objects.get(pk=kwargs.get('pk'))
+        try:
+            post = Post.objects.get(pk=kwargs.get('pk'), status='APPROVE')
+        except Post.DoesNotExist:
+            raise Http404('Post does not exist')
         if form.is_valid():
             post_comment = PostComment.objects.create(
                 post=post,
@@ -63,7 +70,7 @@ class PostCreateView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            post = Post.objects.create(
+            Post.objects.create(
                 creator=request.user,
                 body=form.cleaned_data['body'],
             )

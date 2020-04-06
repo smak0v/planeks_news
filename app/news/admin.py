@@ -21,21 +21,20 @@ class PostCommentInline(admin.StackedInline):
 
 
 class PostAdmin(MarkdownxModelAdmin):
-    readonly_fields = [
-        'creator',
-    ]
     list_display = [
         'pk',
         'creator',
         'timestamp',
+        'status',
     ]
     list_filter = [
         'timestamp',
+        'status',
     ]
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('body', 'creator',),
+            'fields': ('body', 'creator', 'status', ),
         }),
     )
     search_fields = [
@@ -47,6 +46,7 @@ class PostAdmin(MarkdownxModelAdmin):
         'pk',
         'creator',
         'timestamp',
+        'status',
     ]
     inlines = [
         PostCommentInline,

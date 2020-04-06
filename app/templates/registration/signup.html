@@ -15,6 +15,9 @@
                             <div class="form_row text-center">
                                 <p class="form_edit_title">
                                     {{ field.label }}
+                                    {% if field.field.required %}
+                                        <span class="red">*</span>
+                                    {% endif %}
                                 </p>
                                 <div class="login_signup_field">
                                     {{ field }}
