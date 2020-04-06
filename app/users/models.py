@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import Group
 from django.core.mail import send_mail
 from django.db import models
 
@@ -33,8 +34,14 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(
         default=False,
     )
+    is_staff = models.BooleanField(
+        default=False,
+    )
     is_admin = models.BooleanField(
         default=False,
+    )
+    groups = models.ManyToManyField(
+        to=Group,
     )
 
     objects = UserManager()
@@ -50,10 +57,6 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-
-    @property
-    def is_staff(self):
-        return self.is_admin
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email, ], **kwargs)

@@ -50,12 +50,13 @@ class PostDetailView(View):
                 creator=request.user,
                 body=form.cleaned_data['body'],
             )
-            html_message = render_to_string('email/commented_post.html', {
-                'domain': get_current_site(request).domain,
-                'pk': post.pk,
-                'commentator': post_comment.creator.email,
-            })
-            post.creator.email_user('PLANEKS News', strip_tags(html_message), html_message=html_message)
+            if post_comment.creator != post.creator:
+                html_message = render_to_string('email/commented_post.html', {
+                    'domain': get_current_site(request).domain,
+                    'pk': post.pk,
+                    'commentator': post_comment.creator.email,
+                })
+                post.creator.email_user('PLANEKS News', strip_tags(html_message), html_message=html_message)
             return redirect('posts:details', post.pk)
         return render(request, self.template_name, {'post': post, 'form': form, })
 
@@ -68,12 +69,26 @@ class PostCreateView(View):
         return render(request, self.template_name, {'form': self.form_class(), })
 
     def post(self, request, *args, **kwargs):
+        flag = False
         form = self.form_class(request.POST)
         if form.is_valid():
-            Post.objects.create(
+            post = Post.objects.create(
                 creator=request.user,
                 body=form.cleaned_data['body'],
             )
+            user_permissions = []
+            permissions = []
+            for group in request.user.groups.all():
+                permissions.append(group.permissions.all())
+            for permission in permissions:
+                user_permissions.append(permission[0])
+            for perm in user_permissions:
+                if perm.codename == 'need_pre_moderation':
+                    flag = True
+                    break
+            if not flag:
+                post.status = 'APPROVE'
+                post.save()
             return redirect('posts:main')
         return render(request, self.template_name, {'form': form, })
 

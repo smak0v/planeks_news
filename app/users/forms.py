@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.admin import widgets
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from .models import User
@@ -62,3 +63,25 @@ class UserChangeForm(forms.ModelForm):
 
     def clean_password(self):
         return self.initial['password']
+
+
+class GroupAdminForm(forms.ModelForm):
+    users = forms.ModelMultipleChoiceField(
+        User.objects.all(),
+        widget=widgets.FilteredSelectMultiple('Users', False),
+        required=False,
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(GroupAdminForm, self).__init__(*args, **kwargs)
+        if self.instance.pk:
+            initial_users = self.instance.user_set.values_list('pk', flat=True)
+            self.initial['users'] = initial_users
+
+    def save(self, *args, **kwargs):
+        kwargs['commit'] = True
+        return super(GroupAdminForm, self).save(*args, **kwargs)
+
+    def save_m2m(self):
+        self.instance.user_set.clear()
+        self.instance.user_set.add(*self.cleaned_data['users'])

@@ -21,7 +21,7 @@
                 </div>
                 <div class="post_comments">
                     {% if user.is_authenticated %}
-                        <form method="post">
+                        <form method="post" class="comment_form">
                             {% csrf_token %}
                             {% for field in form %}
                                 <div class="form_row text-center">
@@ -63,4 +63,6 @@
         </div>
     </div>
 {% endblock %}
-{% block scripts %}{% endblock scripts %}
+{% block scripts %}
+    <script src="{% static "js/post_comments.js" %}"></script>
+{% endblock scripts %}
